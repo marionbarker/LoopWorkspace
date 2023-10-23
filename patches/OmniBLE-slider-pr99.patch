@@ -1,0 +1,207 @@
+diff --git a/OmniBLE/OmniBLE.xcodeproj/project.pbxproj b/OmniBLE/OmniBLE.xcodeproj/project.pbxproj
+index c9baca2..b6e92cd 100644
+--- a/OmniBLE/OmniBLE.xcodeproj/project.pbxproj
++++ b/OmniBLE/OmniBLE.xcodeproj/project.pbxproj
+@@ -67,6 +67,7 @@
+ 		10389A3C26FF7841002115E9 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10389A1D26FF7841002115E9 /* Message.swift */; };
+ 		10389A3F26FF7841002115E9 /* CRC16.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10389A2026FF7841002115E9 /* CRC16.swift */; };
+ 		10389A4126FF7841002115E9 /* MessageTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10389A2226FF7841002115E9 /* MessageTransport.swift */; };
++		2742C7052AD875B100E67833 /* SlideButton in Frameworks */ = {isa = PBXBuildFile; productRef = 2742C7042AD875B100E67833 /* SlideButton */; };
+ 		4B67E2D5289B4EDB002D92AF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4B67E2D3289B4EDB002D92AF /* Localizable.strings */; };
+ 		84752E9326ED0FFE009FD801 /* OmniBLE.h in Headers */ = {isa = PBXBuildFile; fileRef = 84752E8526ED0FFE009FD801 /* OmniBLE.h */; settings = {ATTRIBUTES = (Public, ); }; };
+ 		84752ED626ED13F5009FD801 /* Id.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84752EBF26ED13F5009FD801 /* Id.swift */; };
+@@ -449,6 +450,7 @@
+ 			isa = PBXFrameworksBuildPhase;
+ 			buildActionMask = 2147483647;
+ 			files = (
++				2742C7052AD875B100E67833 /* SlideButton in Frameworks */,
+ 				847530F626ED65DD009FD801 /* LoopKit.framework in Frameworks */,
+ 				8475306E26ED15DE009FD801 /* CryptoSwift in Frameworks */,
+ 				847530F826ED65DD009FD801 /* LoopKitUI.framework in Frameworks */,
+@@ -908,6 +910,7 @@
+ 			name = OmniBLE;
+ 			packageProductDependencies = (
+ 				8475306D26ED15DE009FD801 /* CryptoSwift */,
++				2742C7042AD875B100E67833 /* SlideButton */,
+ 			);
+ 			productName = OmniBLE;
+ 			productReference = 84752E8226ED0FFE009FD801 /* OmniBLE.framework */;
+@@ -1026,6 +1029,7 @@
+ 			mainGroup = 84752E7826ED0FFE009FD801;
+ 			packageReferences = (
+ 				8475306C26ED15DE009FD801 /* XCRemoteSwiftPackageReference "CryptoSwift" */,
++				2742C7032AD875B100E67833 /* XCRemoteSwiftPackageReference "SlideButton" */,
+ 			);
+ 			productRefGroup = 84752E8326ED0FFE009FD801 /* Products */;
+ 			projectDirPath = "";
+@@ -1728,6 +1732,14 @@
+ /* End XCConfigurationList section */
+ 
+ /* Begin XCRemoteSwiftPackageReference section */
++		2742C7032AD875B100E67833 /* XCRemoteSwiftPackageReference "SlideButton" */ = {
++			isa = XCRemoteSwiftPackageReference;
++			repositoryURL = "https://github.com/no-comment/SlideButton";
++			requirement = {
++				branch = main;
++				kind = branch;
++			};
++		};
+ 		8475306C26ED15DE009FD801 /* XCRemoteSwiftPackageReference "CryptoSwift" */ = {
+ 			isa = XCRemoteSwiftPackageReference;
+ 			repositoryURL = "https://github.com/krzyzanowskim/CryptoSwift";
+@@ -1739,6 +1751,11 @@
+ /* End XCRemoteSwiftPackageReference section */
+ 
+ /* Begin XCSwiftPackageProductDependency section */
++		2742C7042AD875B100E67833 /* SlideButton */ = {
++			isa = XCSwiftPackageProductDependency;
++			package = 2742C7032AD875B100E67833 /* XCRemoteSwiftPackageReference "SlideButton" */;
++			productName = SlideButton;
++		};
+ 		8475306D26ED15DE009FD801 /* CryptoSwift */ = {
+ 			isa = XCSwiftPackageProductDependency;
+ 			package = 8475306C26ED15DE009FD801 /* XCRemoteSwiftPackageReference "CryptoSwift" */;
+diff --git a/OmniBLE/OmniBLE/PumpManagerUI/ViewModels/InsertCannulaViewModel.swift b/OmniBLE/OmniBLE/PumpManagerUI/ViewModels/InsertCannulaViewModel.swift
+index 70b56e5..6747d7d 100644
+--- a/OmniBLE/OmniBLE/PumpManagerUI/ViewModels/InsertCannulaViewModel.swift
++++ b/OmniBLE/OmniBLE/PumpManagerUI/ViewModels/InsertCannulaViewModel.swift
+@@ -29,7 +29,7 @@ class InsertCannulaViewModel: ObservableObject, Identifiable {
+         var actionButtonAccessibilityLabel: String {
+             switch self {
+             case .ready, .startingInsertion:
+-                return LocalizedString("Insert Cannula", comment: "Insert cannula action button accessibility label while ready to pair")
++                return LocalizedString("Slide Button to insert Cannula", comment: "Insert cannula slider button accessibility label while ready to pair")
+             case .inserting:
+                 return LocalizedString("Inserting. Please wait.", comment: "Insert cannula action button accessibility label while pairing")
+             case .checkingInsertion:
+@@ -53,7 +53,7 @@ class InsertCannulaViewModel: ObservableObject, Identifiable {
+         var nextActionButtonDescription: String {
+             switch self {
+             case .ready:
+-                return LocalizedString("Insert Cannula", comment: "Cannula insertion button text while ready to insert")
++                return LocalizedString("Slide to Insert Cannula", comment: "Cannula insertion button text while ready to insert")
+             case .error:
+                 return LocalizedString("Retry", comment: "Cannula insertion button text while showing error")
+             case .inserting, .startingInsertion:
+@@ -124,6 +124,14 @@ class InsertCannulaViewModel: ObservableObject, Identifiable {
+     }
+ 
+     @Published var state: InsertCannulaViewModelState = .ready
++    public var stateNeedsDeliberateUserAcceptance : Bool {
++        switch state {
++        case .ready:
++            true
++        default:
++            false
++        }
++    }
+     
+     var didFinish: (() -> Void)?
+     
+diff --git a/OmniBLE/OmniBLE/PumpManagerUI/Views/InsertCannulaView.swift b/OmniBLE/OmniBLE/PumpManagerUI/Views/InsertCannulaView.swift
+index bf625b0..7fd69ac 100644
+--- a/OmniBLE/OmniBLE/PumpManagerUI/Views/InsertCannulaView.swift
++++ b/OmniBLE/OmniBLE/PumpManagerUI/Views/InsertCannulaView.swift
+@@ -8,6 +8,7 @@
+ 
+ import SwiftUI
+ import LoopKitUI
++import SlideButton
+ 
+ struct InsertCannulaView: View {
+     
+@@ -24,7 +25,7 @@ struct InsertCannulaView: View {
+ 
+                 HStack {
+                     InstructionList(instructions: [
+-                        LocalizedString("Tap below to start cannula insertion.", comment: "Label text for step one of insert cannula instructions"),
++                        LocalizedString("Slide the switch below to start cannula insertion.", comment: "Label text for step one of insert cannula instructions"),
+                         LocalizedString("Wait until insertion is completed.", comment: "Label text for step two of insert cannula instructions"),
+                     ])
+                     .disabled(viewModel.state.instructionsDisabled)
+@@ -65,17 +66,11 @@ struct InsertCannulaView: View {
+                 }
+                 
+                 if (self.viewModel.error == nil || self.viewModel.error?.recoverable == true) {
+-                    Button(action: {
+-                        self.viewModel.continueButtonTapped()
+-                    }) {
+-                        Text(self.viewModel.state.nextActionButtonDescription)
+-                            .accessibility(identifier: "button_next_action")
+-                            .accessibility(label: Text(self.viewModel.state.actionButtonAccessibilityLabel))
+-                            .actionButtonStyle(.primary)
+-                    }
++                    actionButton
+                     .disabled(self.viewModel.state.isProcessing)
+                     .animation(nil)
+                     .zIndex(1)
++                        
+                 }
+             }
+             .transition(AnyTransition.opacity.combined(with: .move(edge: .bottom)))
+@@ -88,6 +83,38 @@ struct InsertCannulaView: View {
+         .navigationBarItems(trailing: cancelButton)
+     }
+     
++    
++    var actionText : some View {
++        Text(self.viewModel.state.nextActionButtonDescription)
++            .accessibility(identifier: "button_next_action")
++            .accessibility(label: Text(self.viewModel.state.actionButtonAccessibilityLabel))
++            .font(.headline)
++            
++    }
++    
++    
++    @ViewBuilder
++    var actionButton: some View {
++        if self.viewModel.stateNeedsDeliberateUserAcceptance {
++            SlideButton(action: {
++                self.viewModel.continueButtonTapped()
++            }) {
++                actionText
++            }
++            
++        } else {
++            Button(action: {
++                self.viewModel.continueButtonTapped()
++            }) {
++                actionText
++                    .actionButtonStyle(.primary)
++            }
++            
++        }
++        
++        
++    }
++    
+     var cancelButton: some View {
+         Button(LocalizedString("Cancel", comment: "Cancel button text in navigation bar on insert cannula screen")) {
+             cancelModalIsPresented = true
+@@ -105,3 +132,26 @@ struct InsertCannulaView: View {
+     }
+ 
+ }
++class MockCannulaInserter: CannulaInserter {
++    public func insertCannula(completion: @escaping (Result<TimeInterval,OmniBLEPumpManagerError>) -> Void) {
++        let mockDelay = TimeInterval(seconds: 3)
++        let result :Result<TimeInterval, OmniBLEPumpManagerError> = .success(mockDelay)
++        completion(result)
++    }
++    
++    func checkCannulaInsertionFinished(completion: @escaping (OmniBLEPumpManagerError?) -> Void) {
++        completion(nil)
++    }
++    
++    
++}
++struct InsertCannulaView_Previews: PreviewProvider {
++    static var mockInserter = MockCannulaInserter()
++    static var model = InsertCannulaViewModel(cannulaInserter: mockInserter)
++    static var previews: some View {
++        InsertCannulaView(viewModel: model)
++ 
++
++        
++    }
++}
