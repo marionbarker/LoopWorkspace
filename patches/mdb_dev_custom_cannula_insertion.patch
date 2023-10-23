@@ -1,0 +1,14 @@
+Submodule OmniBLE contains modified content
+diff --git a/OmniBLE/OmniBLE/OmnipodCommon/Pod.swift b/OmniBLE/OmniBLE/OmnipodCommon/Pod.swift
+index 70fcb9f..0ab1b13 100644
+--- a/OmniBLE/OmniBLE/OmnipodCommon/Pod.swift
++++ b/OmniBLE/OmniBLE/OmnipodCommon/Pod.swift
+@@ -79,7 +79,7 @@ public struct Pod {
+     // Checked to verify it agrees with value returned by pod during the pairing process.
+     public static let cannulaInsertionUnits = 0.5
+ 
+-    public static let cannulaInsertionUnitsExtra = 0.0 // edit to add a fixed additional amount of insulin during cannula insertion
++    public static let cannulaInsertionUnitsExtra = 0.35 // edit to add a fixed additional amount of insulin during cannula insertion
+ 
+     // Default and limits for expiration reminder alerts
+     public static let defaultExpirationReminderOffset = TimeInterval(hours: 2)
