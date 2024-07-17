@@ -11,7 +11,7 @@ on:
     - cron: "0 6 1 * *" # Builds the app on the 1st of every month at 06:00 UTC
 
 env:
-  UPSTREAM_REPO: marionbarker/LoopWorkspace
+  UPSTREAM_REPO: LoopKit/LoopWorkspace
   UPSTREAM_BRANCH: ${{ github.ref_name }} # branch on upstream repository to sync from (replace with specific branch name if needed)
   TARGET_BRANCH: ${{ github.ref_name }} # target branch on fork to be kept in sync, and target branch on upstream to be kept alive (replace with specific branch name if needed)
   ALIVE_BRANCH_MAIN: alive-main
@@ -69,13 +69,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
         run: |
-          # Get ref for marionbarker/LoopWorkspace:main
+          # Get ref for LoopKit/LoopWorkspace:main
           SHA_MAIN=$(curl -sS -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/${{ env.UPSTREAM_REPO }}/git/refs/heads/main | jq -r '.object.sha')
 
-          # Get ref for marionbarker/LoopWorkspace:dev
+          # Get ref for LoopKit/LoopWorkspace:dev
           SHA_DEV=$(curl -sS -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/${{ env.UPSTREAM_REPO }}/git/refs/heads/dev | jq -r '.object.sha')
 
-          # Create alive-main branch based on marionbarker/LoopWorkspace:main
+          # Create alive-main branch based on LoopKit/LoopWorkspace:main
           gh api \
             --method POST \
             -H "Authorization: token $GITHUB_TOKEN" \
@@ -84,7 +84,7 @@ jobs:
             -f ref='refs/heads/alive-main' \
             -f sha=$SHA_MAIN
 
-          # Create alive-dev branch based on marionbarker/LoopWorkspace:dev
+          # Create alive-dev branch based on LoopKit/LoopWorkspace:dev
           gh api \
             --method POST \
             -H "Authorization: token $GITHUB_TOKEN" \
@@ -101,13 +101,14 @@ jobs:
     name: Check upstream and keep alive
     outputs:
       NEW_COMMITS: ${{ steps.sync.outputs.has_new_commits }}
+      ABORT_SYNC: ${{ steps.check_branch.outputs.ABORT_SYNC }}
 
     steps:
       - name: Check if running on main or dev branch
-        id: check_branch
         if: |
           needs.check_alive_and_permissions.outputs.WORKFLOW_PERMISSION == 'true' &&
           (vars.SCHEDULED_BUILD != 'false' || vars.SCHEDULED_SYNC != 'false')
+        id: check_branch
         run: |
           if [ "${GITHUB_REF##*/}" = "main" ]; then
             echo "Running on main branch"
@@ -134,7 +135,7 @@ jobs:
       - name: Sync upstream changes
         if: | # do not run the upstream sync action on the upstream repository
           needs.check_alive_and_permissions.outputs.WORKFLOW_PERMISSION == 'true' &&
-          vars.SCHEDULED_SYNC != 'false' && github.repository_owner != 'marionbarker' && steps.check_branch.outputs.ABORT_SYNC == 'false'
+          vars.SCHEDULED_SYNC != 'false' && github.repository_owner != 'LoopKit' && steps.check_branch.outputs.ABORT_SYNC == 'false'
         id: sync
         uses: aormsby/Fork-Sync-With-Upstream-action@v3.4.1
         with:
@@ -177,7 +178,7 @@ jobs:
         run: |
           echo "### :calendar: Scheduled Sync and Build Disabled :mobile_phone_off:" >> $GITHUB_STEP_SUMMARY
           echo "You have not yet configured the scheduled sync and build for Loop's browser build." >> $GITHUB_STEP_SUMMARY
-          echo "Synchronizing your fork of <code>LoopWorkspace</code> with the upstream repository <code>marionbarker/LoopWorkspace</code> will be skipped." >> $GITHUB_STEP_SUMMARY
+          echo "Synchronizing your fork of <code>LoopWorkspace</code> with the upstream repository <code>LoopKit/LoopWorkspace</code> will be skipped." >> $GITHUB_STEP_SUMMARY
           echo "If you want to enable automatic builds and updates for your Loop, please follow the instructions \
                 under the following path <code>LoopWorkspace/fastlane/testflight.md</code>." >> $GITHUB_STEP_SUMMARY
 
@@ -211,7 +212,7 @@ jobs:
       - name: Sync upstream changes
         if: | # do not run the upstream sync action on the upstream repository
           needs.check_alive_and_permissions.outputs.WORKFLOW_PERMISSION == 'true' &&
-          vars.SCHEDULED_SYNC != 'false' && github.repository_owner != 'marionbarker' && needs.check_latest_from_upstream.outputs.ABORT_SYNC == 'false'
+          vars.SCHEDULED_SYNC != 'false' && github.repository_owner != 'LoopKit' && needs.check_latest_from_upstream.outputs.ABORT_SYNC == 'false'
         id: sync
         uses: aormsby/Fork-Sync-With-Upstream-action@v3.4.1
         with:
