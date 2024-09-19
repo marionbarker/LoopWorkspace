@@ -23,6 +23,7 @@ jobs:
     secrets: inherit
   
   # Checks if GH_PAT holds workflow permissions
+  # Checks if GH_PAT holds workflow permissions
   # Checks for existence of alive branch; if non-existent creates it
   check_alive_and_permissions:
     needs: validate
