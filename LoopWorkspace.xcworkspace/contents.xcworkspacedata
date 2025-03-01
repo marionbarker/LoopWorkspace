@@ -79,13 +79,13 @@
       location = "group:OmniKit/OmniKit.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:OmnipodKit/OmnipodKit.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "group:RileyLinkKit/RileyLinkKit.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:MinimedKit/MinimedKit.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:OmnipodKit/OmnipodKit.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:G7SensorKit/G7SensorKit.xcodeproj">
