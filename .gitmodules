@@ -49,6 +49,9 @@
 [submodule "OmniKit"]
 	path = OmniKit
 	url = https://github.com/LoopKit/OmniKit.git
+[submodule "OmnipodKit"]
+	path = OmnipodKit
+	url = https://github.com/loopandlearn/OmnipodKit.git
 [submodule "MinimedKit"]
 	path = MinimedKit
 	url = https://github.com/LoopKit/MinimedKit.git
