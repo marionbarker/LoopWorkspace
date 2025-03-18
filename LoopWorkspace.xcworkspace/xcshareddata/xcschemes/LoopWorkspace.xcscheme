@@ -553,6 +553,16 @@
                ReferencedContainer = "container:RileyLinkKit/RileyLinkKit.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D8D0ED172D74EF41000B0AF4"
+               BuildableName = "OmniTests.xctest"
+               BlueprintName = "OmniTests"
+               ReferencedContainer = "container:OmnipodKit/OmnipodKit.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
