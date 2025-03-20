@@ -277,6 +277,10 @@ jobs:
           # Several patches may be added per submodule.
           # Adding comments (#) may be useful to easily tell the individual patches apart.
 
+          # Add OmnipodKit repository to LoopWorkspace as new pump driver
+          git clone https://github.com/loopandlearn/OmnipodKit.git
+          git apply OmnipodKit/patches/add_omnipodkit_to_LoopWorkspace.patch
+
       # Patch Fastlane Match to not print tables
       - name: Patch Match Tables
         run: |
