@@ -3,6 +3,7 @@ run-name: Build Loop (${{ github.ref_name }})
 on:
   workflow_dispatch:
 
+  # extra blank line for a commit
   ## Remove the "#" sign from the beginning of the line below to get automated builds on push (code changes in your repository)
   #push:
 
