@@ -132,4 +132,7 @@
    <FileRef
       location = "group:LoopOnboarding/LoopOnboarding.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:EversenseKit/EversenseKit.xcodeproj">
+   </FileRef>
 </Workspace>

@@ -266,6 +266,20 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3E6696E52E927EB900AAE4F1"
+               BuildableName = "EversenseKitPlugin.loopplugin"
+               BlueprintName = "EversenseKitPlugin"
+               ReferencedContainer = "container:EversenseKit/EversenseKit.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "C17F511C291EACCD00555EB5"
                BuildableName = "G7SensorPlugin.loopplugin"
                BlueprintName = "G7SensorPlugin"
@@ -537,6 +551,16 @@
                BuildableName = "RileyLinkBLEKitTests.xctest"
                BlueprintName = "RileyLinkBLEKitTests"
                ReferencedContainer = "container:RileyLinkKit/RileyLinkKit.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3EFE70822E08434B00CF6B9E"
+               BuildableName = "EversenseKitTests.xctest"
+               BlueprintName = "EversenseKitTests"
+               ReferencedContainer = "container:EversenseKit/EversenseKit.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
